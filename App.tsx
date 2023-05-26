@@ -1,22 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useCallback} from 'react';
+import { StyleSheet, SafeAreaView, Image, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
-import RootNavigator from './src/navigators/RootNavigator';
+import { SignInScreen } from './src/screens';
+
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+
+  const [isLoaded] = useFonts({
+    "Raleway-regular": require("./assets/fonts/Raleway-Regular.ttf"),
+    "Raleway-bold": require("./assets/fonts/Raleway-Bold.ttf"),
+    "Raleway-xbold": require("./assets/fonts/Raleway-ExtraBold.ttf"),
+    "Raleway-xligth": require("./assets/fonts/Raleway-ExtraLight.ttf"),
+  });
+
+  const handleOnLayout = useCallback(async () => {
+    if (isLoaded) {
+      await SplashScreen.hideAsync(); //hide the splashscreen
+    }
+  }, [isLoaded]);
+  
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <RootNavigator/>
-        <StatusBar style='dark'/>
-      </NavigationContainer>
-    </View>
+    <SafeAreaView onLayout={handleOnLayout}>
+      <SignInScreen/>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    
+    flex: 1
   },
 });

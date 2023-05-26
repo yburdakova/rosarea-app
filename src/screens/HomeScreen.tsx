@@ -1,15 +1,14 @@
-import { View, Text, ScrollView } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
-    <ScrollView>
-      <SafeAreaView>
-        <Text>
-          Hello
-        </Text>
-      </SafeAreaView>
-    </ScrollView>
+    <View>
+      <Text>HomeScreen</Text>
+    </View>
   )
 }
+
+export default HomeScreen
+
+const styles = StyleSheet.create({})
