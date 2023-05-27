@@ -1,8 +1,14 @@
 import avatar from './images/avatar.jpg';
 import logo from './images/logo.png';
 
+import apple from '../assets/icons/apple.png';
+import google from '../assets/icons/google.png';
+import facebook from '../assets/icons/facebook.png';
 
 export {
     avatar,
-    logo
+    logo,
+    apple,
+    google,
+    facebook
 }
