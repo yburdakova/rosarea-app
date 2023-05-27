@@ -1,61 +1,71 @@
 import React, {useState} from 'react';
-import { StyleSheet, Image, Text, View, useWindowDimensions, TouchableHighlight } from 'react-native'
+import { StyleSheet, Image, Text, View, TouchableHighlight, Button } from 'react-native'
 import { useFonts } from 'expo-font';
+import { Modal } from 'react-native';
+
+import { apple, facebook, google } from '../../assets';
+import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy } from '../components';
 
 
-import { logo, apple, facebook, google } from '../../assets';
-import { CustomInput, CustomButton } from '../components';
+const SignUpScreen = () => {
 
-
-const SignInScreen = () => {
-
-    const { width } = useWindowDimensions();
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const [isTermOfUseVisible, setIsTermOfUseVisible] = useState(false);
+    const [isPrivacyPolicyVisible, setIsPrivacyPolicyVisible] = useState(false);
 
     const font = useFonts({
         'Raleway-regular' : require('./../../assets/fonts/Raleway-Regular.ttf'),
         'Raleway-extraBold' : require('./../../assets/fonts/Raleway-ExtraBold.ttf'),
     });
 
-    const signInPress = () => {console.warn("Sing in pressed");}
-    const forgotPasswordPress = () => {console.warn("Forgot Password pressed");}
+    const signUpPress = () => {console.warn("Sing Up pressed");}
     const signInPressFacebook = () => {console.warn("Facebook");}
     const signInPressGoogle = () => {console.warn("Google");}
     const signInPressApple = () => {console.warn("Apple");}
-    const createNewAccount = () => {console.warn("Create a new account");}
+    const termOfUseModal = () => setIsTermOfUseVisible(() => !isTermOfUseVisible);
+    const privacyPolicyModal = () => setIsPrivacyPolicyVisible(() => !isPrivacyPolicyVisible);
 
     return (
         <View style={styles.root}>
-            
-            <Image 
-                source={logo} 
-                resizeMode='cover' 
-                style={{...styles.logo, width: width * 0.3, height: width * 0.3}}/>
-            <Text style={styles.title}>Rosarea</Text>
+            <Text style={styles.title}>Create an account</Text>
             <CustomInput 
-                placeholder='Username' 
+                placeholder='Enter Username' 
                 value={username} 
                 setValue={setUsername} 
                 secureTextEntry={false}
             />
             <CustomInput 
-                placeholder='Password' 
+                placeholder='Enter Email' 
+                value={email}
+                setValue={setEmail} 
+                secureTextEntry
+            />
+            <CustomInput 
+                placeholder='Enter Password' 
                 value={password} 
                 setValue={setPassword} 
                 secureTextEntry
             />
+            <CustomInput 
+                placeholder='Repeat Password' 
+                value={passwordRepeat} 
+                setValue={setPasswordRepeat} 
+                secureTextEntry
+            />
             <CustomButton 
-                text='Sign In' 
-                onPress={signInPress}
+                text='Sign Up' 
+                onPress={signUpPress}
                 type='primary'
                 
             />
-            <CustomButton 
-                text='Forgot password?'
-                onPress={forgotPasswordPress}
-                type='tertiary'
-            />
+            <View>
+                <Text style={styles.text}>
+                    By registering, you confirm that you accept our <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
+                </Text>
+            </View>
             <View>
                 <View style={styles.divider}>
                     <View style={styles.hr_line}/>
@@ -90,32 +100,50 @@ const SignInScreen = () => {
                 </View>
             </View>
         
-            <CustomButton 
-                text='Don`t have an account? Register now'
-                onPress={createNewAccount}
-                type='tertiary'
-            />
+            <Modal visible={isTermOfUseVisible} animationType='slide'>
+                <ModalWindow 
+                    content={<TermOfUse/>} 
+                    title='Term of Use' 
+                    date='05/24/2023' 
+                    onPress={termOfUseModal}
+                />
+            </Modal>
+
+            <Modal visible={isPrivacyPolicyVisible} animationType='slide'>
+                <ModalWindow 
+                    content={<PrivacyPolicy/>} 
+                    title='Privacy Policy' 
+                    date='05/24/2023' 
+                    onPress={privacyPolicyModal
+                }/>
+            </Modal>
         </View>
     )
 }
 
-export default SignInScreen
+export default SignUpScreen
 
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20
     },
-    logo: {
-        maxWidth: 300,
-        maxHeight: 300,
-        marginTop: 60,
-        
-    },
     title: {
         fontFamily: 'Raleway-xbold',
-        fontSize: 36,
-        marginBottom: 30,
+        fontSize: 28,
+        marginVertical: 30,
+    },
+    text:{
+        fontFamily: 'Raleway-regular',
+        fontSize: 16,
+        color: 'gray',
+        margin: 10,
+        textAlign: 'center',
+    },
+    link:{
+        color: '#3AAA35', 
+        fontFamily: 'Raleway-bold',
+        textDecorationLine:'underline'
     },
     icons_container: {
         display: 'flex',

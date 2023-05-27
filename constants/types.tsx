@@ -12,3 +12,10 @@ export interface custiomButtonProps {
     onPress: Dispatch<SetStateAction<string>>,
     type: string
 }
+
+export interface modalWindowProps {
+    title: string,
+    date: string,
+    content: any,
+    onPress: Dispatch<SetStateAction<string>>,
+}
