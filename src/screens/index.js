@@ -5,6 +5,7 @@ import PaymentScreen from "./PaymentScreen";
 import ProfileScreen from "./ProfileScreen";
 import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
+import ConfirmEmailScreen from "./ConfirmEmailScreen";
 
 
 export {
@@ -15,4 +16,5 @@ export {
     ProfileScreen,
     SignInScreen,
     SignUpScreen,
+    ConfirmEmailScreen
 };

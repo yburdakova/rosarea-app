@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import { StyleSheet, Image, Text, View, TouchableHighlight, Button } from 'react-native'
-import { useFonts } from 'expo-font';
-import { Modal } from 'react-native';
+import { StyleSheet, Text, View, Modal } from 'react-native'
 
 import { apple, facebook, google } from '../../assets';
-import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy } from '../components';
+import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton } from '../components';
 
 
 const SignUpScreen = () => {
@@ -16,12 +14,8 @@ const SignUpScreen = () => {
     const [isTermOfUseVisible, setIsTermOfUseVisible] = useState(false);
     const [isPrivacyPolicyVisible, setIsPrivacyPolicyVisible] = useState(false);
 
-    const font = useFonts({
-        'Raleway-regular' : require('./../../assets/fonts/Raleway-Regular.ttf'),
-        'Raleway-extraBold' : require('./../../assets/fonts/Raleway-ExtraBold.ttf'),
-    });
-
     const signUpPress = () => {console.warn("Sing Up pressed");}
+    const signInPress= () => {console.warn("Sing In pressed");}
     const signInPressFacebook = () => {console.warn("Facebook");}
     const signInPressGoogle = () => {console.warn("Google");}
     const signInPressApple = () => {console.warn("Apple");}
@@ -41,7 +35,7 @@ const SignUpScreen = () => {
                 placeholder='Enter Email' 
                 value={email}
                 setValue={setEmail} 
-                secureTextEntry
+                secureTextEntry={false}
             />
             <CustomInput 
                 placeholder='Enter Password' 
@@ -73,32 +67,16 @@ const SignUpScreen = () => {
                     <View style={styles.hr_line}/>
                 </View>
                 <View style={styles.icons_container}>
-                    <TouchableHighlight
-                        onPress={signInPressGoogle} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={google} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        onPress={signInPressApple} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={apple} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        onPress={signInPressFacebook} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={facebook} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
+                    <SocialAuthButton logo={google} onPress={signInPressGoogle}/>
+                    <SocialAuthButton logo={apple} onPress={signInPressApple}/>
+                    <SocialAuthButton logo={facebook} onPress={signInPressFacebook}/>
                 </View>
             </View>
+            <CustomButton 
+                text='Have an account? Sign In'
+                onPress={signInPress}
+                type='tertiary'
+            />
         
             <Modal visible={isTermOfUseVisible} animationType='slide'>
                 <ModalWindow 
@@ -168,17 +146,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#3AAA35',
         marginHorizontal: 10
-    },
-    icon_item:{
-        borderColor: '#3AAA35',
-        borderWidth: 1,
-        borderRadius: 20,
-        margin:5,
-        padding:10,
-        shadowOpacity: 0.2
-    },
-    icon:{
-        width:60,
-        height:60,
     },
 })

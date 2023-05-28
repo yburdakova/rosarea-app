@@ -1,4 +1,6 @@
 import React, {Dispatch, SetStateAction} from 'react';
+import { GestureResponderEvent, ImageProps, ImageSourcePropType } from 'react-native';
+import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 
 export interface custiomInputProps {
     placeholder: string,
@@ -18,4 +20,9 @@ export interface modalWindowProps {
     date: string,
     content: any,
     onPress: Dispatch<SetStateAction<string>>,
+}
+
+export interface socialAuthButtonProps {
+    onPress: (event: GestureResponderEvent) => void,
+    logo: any,
 }

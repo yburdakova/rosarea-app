@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, Image, Text, View, useWindowDimensions, TouchableHighlight } from 'react-native'
-import { useFonts } from 'expo-font';
-
 
 import { logo, apple, facebook, google } from '../../assets';
-import { CustomInput, CustomButton } from '../components';
+import { CustomInput, CustomButton, SocialAuthButton } from '../components';
 
 
 const SignInScreen = () => {
@@ -12,11 +10,6 @@ const SignInScreen = () => {
     const { width } = useWindowDimensions();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
-    const font = useFonts({
-        'Raleway-regular' : require('./../../assets/fonts/Raleway-Regular.ttf'),
-        'Raleway-extraBold' : require('./../../assets/fonts/Raleway-ExtraBold.ttf'),
-    });
 
     const signInPress = () => {console.warn("Sing in pressed");}
     const forgotPasswordPress = () => {console.warn("Forgot Password pressed");}
@@ -63,30 +56,9 @@ const SignInScreen = () => {
                     <View style={styles.hr_line}/>
                 </View>
                 <View style={styles.icons_container}>
-                    <TouchableHighlight
-                        onPress={signInPressGoogle} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={google} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        onPress={signInPressApple} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={apple} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        onPress={signInPressFacebook} 
-                        underlayColor='white'
-                    >
-                        <View style={styles.icon_item}>
-                            <Image source={facebook} style={styles.icon}/>
-                        </View>
-                    </TouchableHighlight>
+                    <SocialAuthButton logo={google} onPress={signInPressGoogle}/>
+                    <SocialAuthButton logo={apple} onPress={signInPressApple}/>
+                    <SocialAuthButton logo={facebook} onPress={signInPressFacebook}/>
                 </View>
             </View>
         
@@ -141,16 +113,5 @@ const styles = StyleSheet.create({
         color: '#3AAA35',
         marginHorizontal: 10
     },
-    icon_item:{
-        borderColor: '#3AAA35',
-        borderWidth: 1,
-        borderRadius: 20,
-        margin:5,
-        padding:10,
-        shadowOpacity: 0.2
-    },
-    icon:{
-        width:60,
-        height:60,
-    },
+    
 })
