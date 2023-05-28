@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import { CustomInput, CustomButton, } from '../components';
 
@@ -8,7 +8,6 @@ const ConfirmEmailScreen = () => {
   const [username, setUsername] = useState('');
   const [code, setCode] = useState('')
   
-  const signUpPress = () => {console.warn("Sing Up pressed");}
   const signInPress = () => {console.warn("Sing In pressed");}
   const onConfirmPress = () => {console.warn("Confirm pressed");}
   const onResendPress = () => {console.warn("Resend code");}
