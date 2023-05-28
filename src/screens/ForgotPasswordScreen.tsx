@@ -7,7 +7,7 @@ const ForgotPasswordScreen = () => {
 
     const [email, setEmail] = useState('');
 
-    const onResendPress = () => {console.warn("Resend code");}
+    const onResendPress = () => {console.warn("Reset password");}
     const signInPress = () => {console.warn("Sing In pressed");}
 
     return (
