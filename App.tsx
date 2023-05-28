@@ -2,8 +2,9 @@ import React, {useCallback} from 'react';
 import { StyleSheet, SafeAreaView, Image, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { NavigationContainer } from '@react-navigation/native';
 
-import { SignInScreen , SignUpScreen, ConfirmEmailScreen, ForgotPasswordScreen, ConfirmResetScreen} from './src/screens';
+import Navigation from './src/navigators/Navigation';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,14 +28,14 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView onLayout={handleOnLayout}>
-      <ConfirmResetScreen/>
+    <SafeAreaView onLayout={handleOnLayout} style={styles.root}>
+      <Navigation/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1
   },
 });

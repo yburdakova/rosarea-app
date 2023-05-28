@@ -4,6 +4,7 @@ import { StyleSheet, Image, Text, View, useWindowDimensions, TouchableHighlight 
 import { logo, apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, SocialAuthButton } from '../components';
 
+import { useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
 
@@ -11,7 +12,13 @@ const SignInScreen = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const signInPress = () => {console.warn("Sing in pressed");}
+    const navigation = useNavigation();
+
+    const signInPress = () => {
+        console.warn("Sing in pressed");
+        //auth user
+        navigation.navigate('Home');
+    }
     const forgotPasswordPress = () => {console.warn("Forgot Password pressed");}
     const signInPressFacebook = () => {console.warn("Facebook");}
     const signInPressGoogle = () => {console.warn("Google");}
