@@ -7,6 +7,7 @@ import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
 import ConfirmEmailScreen from "./ConfirmEmailScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
+import ConfirmResetScreen from "./ConfirmResetScreen";
 
 
 export {
@@ -18,5 +19,6 @@ export {
     SignInScreen,
     SignUpScreen,
     ConfirmEmailScreen,
-    ForgotPasswordScreen
+    ForgotPasswordScreen,
+    ConfirmResetScreen
 };

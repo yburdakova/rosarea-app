@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView, Image, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-import { SignInScreen , SignUpScreen, ConfirmEmailScreen, ForgotPasswordScreen} from './src/screens';
+import { SignInScreen , SignUpScreen, ConfirmEmailScreen, ForgotPasswordScreen, ConfirmResetScreen} from './src/screens';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <SafeAreaView onLayout={handleOnLayout}>
-      <ForgotPasswordScreen/>
+      <ConfirmResetScreen/>
     </SafeAreaView>
   );
 }
