@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Navigation from './src/navigators/Navigation';
+import Navigation, {StackParamsList} from './src/navigators/Navigation';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,7 +19,7 @@ export default function App() {
 
   const handleOnLayout = useCallback(async () => {
     if (isLoaded) {
-      await SplashScreen.hideAsync(); //hide the splashscreen
+      await SplashScreen.hideAsync(); 
     }
   }, [isLoaded]);
   
@@ -29,13 +29,14 @@ export default function App() {
 
   return (
     <SafeAreaView onLayout={handleOnLayout} style={styles.root}>
-      <Navigation/>
+      <Navigation />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   },
 });

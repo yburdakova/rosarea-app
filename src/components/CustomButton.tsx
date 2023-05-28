@@ -10,7 +10,7 @@ const CustomButton = ({text, onPress, type = 'primary'}:custiomButtonProps) => {
             style={[ 
                 styles.container, 
                 {backgroundColor: type === 'primary'? COLORS.primary : type === 'tertiary' ? COLORS.tertiary : COLORS.secondary},
-                {width: type === 'tertiary' ? '50%' : '90%'}
+                {width: type === 'tertiary' ? '60%' : '90%'}
             ]}
             onPress={onPress} 
             type={type}

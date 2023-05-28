@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Modal } from 'react-native'
-
+import { useNavigation } from '@react-navigation/native';
 import { apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton } from '../components';
 
@@ -14,8 +14,10 @@ const SignUpScreen = () => {
     const [isTermOfUseVisible, setIsTermOfUseVisible] = useState(false);
     const [isPrivacyPolicyVisible, setIsPrivacyPolicyVisible] = useState(false);
 
-    const signUpPress = () => {console.warn("Sing Up pressed");}
-    const signInPress= () => {console.warn("Sing In pressed");}
+    const navigation = useNavigation();
+
+    const signUpPress = () => {navigation.navigate('ConfirmEmail')}
+    const signInPress= () => {navigation.navigate('SignIn')}
     const signInPressFacebook = () => {console.warn("Facebook");}
     const signInPressGoogle = () => {console.warn("Google");}
     const signInPressApple = () => {console.warn("Apple");}
@@ -50,7 +52,7 @@ const SignUpScreen = () => {
                 secureTextEntry
             />
             <CustomButton 
-                text='Sign Up' 
+                text='Register' 
                 onPress={signUpPress}
                 type='primary'
                 

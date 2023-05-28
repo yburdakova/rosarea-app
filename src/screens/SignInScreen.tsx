@@ -15,15 +15,15 @@ const SignInScreen = () => {
     const navigation = useNavigation();
 
     const signInPress = () => {
-        console.warn("Sing in pressed");
-        //auth user
         navigation.navigate('Home');
     }
-    const forgotPasswordPress = () => {console.warn("Forgot Password pressed");}
+    const forgotPasswordPress = () => {
+        navigation.navigate('ForgotPassword');
+    }
     const signInPressFacebook = () => {console.warn("Facebook");}
     const signInPressGoogle = () => {console.warn("Google");}
     const signInPressApple = () => {console.warn("Apple");}
-    const createNewAccount = () => {console.warn("Create a new account");}
+    const createNewAccount = () => {navigation.navigate('SignUp');}
 
     return (
         <View style={styles.root}>
@@ -70,7 +70,7 @@ const SignInScreen = () => {
             </View>
         
             <CustomButton 
-                text='Don`t have an account? Register now'
+                text='Don`t have an account?'
                 onPress={createNewAccount}
                 type='tertiary'
             />

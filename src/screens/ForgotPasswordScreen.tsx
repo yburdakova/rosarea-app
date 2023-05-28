@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { CustomInput, CustomButton, } from '../components';
 
@@ -7,8 +8,10 @@ const ForgotPasswordScreen = () => {
 
     const [email, setEmail] = useState('');
 
-    const onResendPress = () => {console.warn("Reset password");}
-    const signInPress = () => {console.warn("Sing In pressed");}
+    const navigation = useNavigation();
+
+    const onResendPress = () => {navigation.navigate('ResetPassword')}
+    const signInPress = () => {navigation.navigate('SignIn')}
 
     return (
         <View style={styles.root}>

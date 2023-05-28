@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 import { CustomInput, CustomButton, } from '../components';
+
 
 const ConfirmResetScreen = () => {
 
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('')
     
-    const signInPress = () => {console.warn("Sing In pressed");}
-    const onCreatePasswordPress = () => {console.warn("on Create Password Press");}
+    const navigation = useNavigation();
+
+    const signInPress = () => {navigation.navigate('SignIn')}
+    const onCreatePasswordPress = () => {navigation.navigate('Home');}
     const onResendPress = () => {console.warn("Resend code");}
 
     return (
@@ -29,7 +33,7 @@ const ConfirmResetScreen = () => {
             />
 
             <CustomButton 
-                text='Create Password' 
+                text='Submit' 
                 onPress={onCreatePasswordPress}
                 type='primary'
                 

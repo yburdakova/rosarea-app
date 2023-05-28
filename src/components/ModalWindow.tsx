@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     modal_date:{
         fontSize: 16,
         fontFamily: 'Raleway-regular',
-        marginVertical:5,
+        marginVertical:10,
         color: 'gray'
     },
     modal_button:{
