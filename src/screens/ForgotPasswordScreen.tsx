@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { CustomInput, CustomButton, } from '../components';
 import { StackParamsList } from '../../constants/types';
+import { userEmail, EMAIL_REGEX } from '../../constants';
+
 
 const ForgotPasswordScreen = () => {
 
-    const [email, setEmail] = useState('');
+    const { control, handleSubmit, formState: {errors}, watch } = useForm();
 
     const navigation = useNavigation<StackParamsList>();
 
@@ -18,15 +21,20 @@ const ForgotPasswordScreen = () => {
         <View style={styles.root}>
             <Text style={styles.title}>Reset your password</Text>
             <CustomInput 
-                placeholder='Enter Username' 
-                value={email} 
-                setValue={setEmail} 
+                name='email'
+                control={control}
+                placeholder='Email' 
                 secureTextEntry={false}
+                rules={{
+                    required: 'Email is required',
+                    pattern: {value: EMAIL_REGEX, message: 'Email has invalid format'},
+                    validate: value => value == userEmail || 'Email does not exists'
+                }}
             />
 
             <CustomButton 
                 text='Reset Password' 
-                onPress={onResendPress}
+                onPress={handleSubmit(onResendPress)}
                 type='primary'
                 
             />

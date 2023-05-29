@@ -7,6 +7,9 @@ import { CustomInput, CustomButton, SocialAuthButton } from '../components';
 import { StackParamsList } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
+import { userName, userPassword } from '../../constants';
+
+
 const SignInScreen = () => {
 
     const { width } = useWindowDimensions();
@@ -41,7 +44,10 @@ const SignInScreen = () => {
                 control={control}
                 placeholder='Username' 
                 secureTextEntry={false}
-                rules={{required: 'Username is required', }}
+                rules={{
+                    required: 'Username is required', 
+                    validate: value => value == userName || 'Username doesn`t exist'
+                }}
             />
             <CustomInput 
                 name='password'
@@ -50,7 +56,8 @@ const SignInScreen = () => {
                 secureTextEntry={true}
                 rules={{
                     required: 'Password is required',
-                    minLength: {value: 4, message: 'Password must be at least 4 characters'}
+                    minLength: {value: 4, message: 'Password must be at least 4 characters'},
+                    validate: value => value == userPassword || 'Password is incorrect'
                 }}
             />
             <CustomButton 

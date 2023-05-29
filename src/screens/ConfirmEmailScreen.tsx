@@ -9,7 +9,7 @@ import { code } from '../../constants';
 
 const ConfirmEmailScreen = () => {
 
-    const { control, handleSubmit, formState: {errors}, watch } = useForm();
+    const { control, handleSubmit, formState: {errors} } = useForm();
 
     const navigation = useNavigation<StackParamsList>();
     

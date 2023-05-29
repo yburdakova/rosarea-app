@@ -7,7 +7,7 @@ import { apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton } from '../components';
 
 import { StackParamsList } from '../../constants/types';
-import { EMAIL_REGEX } from '../../constants';
+import { EMAIL_REGEX, userName, userEmail } from '../../constants';
 
 
 
@@ -39,7 +39,8 @@ const SignUpScreen = () => {
                 rules={{
                     required: 'Username is required', 
                     minLength: {value: 3, message: 'Username must be at least 3 characters'},
-                    maxLength: {value: 20, message: 'Username must be max 20 characters'}
+                    maxLength: {value: 20, message: 'Username must be max 20 characters'},
+                    validate: value => value !== userName || 'Username already exists'
                 }}
             />
             <CustomInput 
@@ -49,7 +50,8 @@ const SignUpScreen = () => {
                 secureTextEntry={false}
                 rules={{
                     required: 'Email is required',
-                    pattern: {value: EMAIL_REGEX, message: 'Email has invalid format'}
+                    pattern: {value: EMAIL_REGEX, message: 'Email has invalid format'},
+                    validate: value => value !== userEmail || 'Email already exists'
                 }}
             />
             <CustomInput 

@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { CustomInput, CustomButton, } from '../components';
 import { StackParamsList } from '../../constants/types';
 
+import { code } from '../../constants';
+
 const ConfirmResetScreen = () => {
 
-    const [password, setPassword] = useState('');
-    const [code, setCode] = useState('')
-    
+    const { control, handleSubmit, formState: {errors}, watch } = useForm();
+    const passwordValue = watch('password');
+
     const navigation = useNavigation<StackParamsList>();
 
     const signInPress = () => {navigation.navigate('SignIn')}
@@ -20,21 +23,38 @@ const ConfirmResetScreen = () => {
         <View style={styles.root}>
             <Text style={styles.title}>Create new password</Text>
             <CustomInput 
-                placeholder='Enter Code' 
-                value={code} 
-                setValue={setCode} 
-                secureTextEntry={false}
+                name='code'
+                control={control}
+                placeholder='Enter confirmation code' 
+                secureTextEntry
+                rules={{
+                    validate: value => value === code || 'Code does not match'
+                }}
             />
             <CustomInput 
-                placeholder='Enter new passord' 
-                value={password}
-                setValue={setPassword} 
-                secureTextEntry={true}
+                name='password'
+                control={control}
+                placeholder='Enter new password' 
+                secureTextEntry
+                rules={{
+                    required: 'Password is required',
+                    minLength: {value: 4, message: 'Password must be at least 4 characters'},
+                    maxLength: {value: 16, message: 'Password must be max 16 characters'}
+                }}
+            />
+            <CustomInput 
+                name='password-repeat'
+                control={control}
+                placeholder='Repeat Password' 
+                secureTextEntry
+                rules={{
+                    validate: value => value === passwordValue || 'Password does not match'
+                }}
             />
 
             <CustomButton 
                 text='Submit' 
-                onPress={onCreatePasswordPress}
+                onPress={handleSubmit(onCreatePasswordPress)}
                 type='primary'
                 
             />
