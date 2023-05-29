@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { StyleSheet, Image, Text, View, useWindowDimensions, TouchableHighlight } from 'react-native'
+import { StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native'
 
 import { logo, apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, SocialAuthButton } from '../components';
-
+import { StackParamsList } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
@@ -12,7 +12,7 @@ const SignInScreen = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackParamsList>();
 
     const signInPress = () => {
         navigation.navigate('Home');

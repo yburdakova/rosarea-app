@@ -3,12 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { CustomInput, CustomButton, } from '../components';
+import { StackParamsList } from '../../constants/types';
 
 const ForgotPasswordScreen = () => {
 
     const [email, setEmail] = useState('');
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackParamsList>();
 
     const onResendPress = () => {navigation.navigate('ResetPassword')}
     const signInPress = () => {navigation.navigate('SignIn')}
@@ -34,9 +35,6 @@ const ForgotPasswordScreen = () => {
                 onPress={signInPress}
                 type='tertiary'
             />  
-
-            
-
         </View>
     )
 }

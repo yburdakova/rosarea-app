@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Navigation, {StackParamsList} from './src/navigators/Navigation';
+import Navigation from './src/navigators/Navigation';
 
 SplashScreen.preventAutoHideAsync();
 

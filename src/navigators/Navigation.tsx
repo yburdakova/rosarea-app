@@ -4,15 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ConfirmEmailScreen, ConfirmResetScreen, ForgotPasswordScreen, HomeScreen, SignInScreen, SignUpScreen } from '../screens';
+import { StackParamsList } from '../../constants/types';
 
-export type StackParamsList = {
-    SignIn: undefined;
-    Home: undefined;
-    ForgotPassword: undefined;
-    ResetPassword: undefined;
-    SignUp: undefined;
-    ConfirmEmail: undefined
-}
 
 const Stack = createNativeStackNavigator<StackParamsList>();
 

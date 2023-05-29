@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { CustomInput, CustomButton, } from '../components';
+import { StackParamsList } from '../../constants/types';
 
 const ConfirmEmailScreen = () => {
 
     const [username, setUsername] = useState('');
     const [code, setCode] = useState('');
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackParamsList>();
     
     const signInPress = () => {navigation.navigate('SignIn');}
     const onConfirmPress = () => {navigation.navigate('Home');}
@@ -44,8 +45,6 @@ const ConfirmEmailScreen = () => {
                     type='tertiary'
                 />  
             </View>
-            
-
         </View>
     )
 }

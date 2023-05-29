@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton } from '../components';
 
+import { StackParamsList } from '../../constants/types';
 
 const SignUpScreen = () => {
 
@@ -14,7 +15,7 @@ const SignUpScreen = () => {
     const [isTermOfUseVisible, setIsTermOfUseVisible] = useState(false);
     const [isPrivacyPolicyVisible, setIsPrivacyPolicyVisible] = useState(false);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackParamsList>();
 
     const signUpPress = () => {navigation.navigate('ConfirmEmail')}
     const signInPress= () => {navigation.navigate('SignIn')}
@@ -59,11 +60,12 @@ const SignUpScreen = () => {
             />
             <View>
                 <Text style={styles.text}>
-                    By registering, you confirm that you accept our <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
+                    By registering, you confirm that you accept our 
+                        <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
                 </Text>
             </View>
             <View>
-                <View style={styles.divider}>
+                <View style={styles.devider}>
                     <View style={styles.hr_line}/>
                     <Text style={styles.icons_title} numberOfLines={2}>Or continue with</Text>
                     <View style={styles.hr_line}/>
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
-    divider:{
+    devider:{
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

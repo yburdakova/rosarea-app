@@ -26,3 +26,13 @@ export interface socialAuthButtonProps {
     onPress: (event: GestureResponderEvent) => void,
     logo: any,
 }
+
+export type StackParamsList = {
+    SignIn: undefined;
+    Home: undefined;
+    ForgotPassword: undefined;
+    ResetPassword: undefined;
+    SignUp: undefined;
+    ConfirmEmail: undefined;
+    navigate:  (p: string) => void;
+}
