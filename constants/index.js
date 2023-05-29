@@ -4,8 +4,10 @@ const COLORS = {
 }
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+const code = '1234'
 
 export { 
     COLORS,
-    EMAIL_REGEX
+    EMAIL_REGEX,
+    code
 }

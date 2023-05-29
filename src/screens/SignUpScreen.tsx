@@ -69,7 +69,7 @@ const SignUpScreen = () => {
                 placeholder='Repeat Password' 
                 secureTextEntry
                 rules={{
-                    validate: value => value === passwordValue || 'Password do not match'
+                    validate: value => value === passwordValue || 'Password does not match'
                 }}
             />
             <CustomButton 

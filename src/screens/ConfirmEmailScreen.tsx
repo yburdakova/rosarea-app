@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { CustomInput, CustomButton, } from '../components';
 import { StackParamsList } from '../../constants/types';
+import { code } from '../../constants';
 
 const ConfirmEmailScreen = () => {
 
-    const [username, setUsername] = useState('');
-    const [code, setCode] = useState('');
+    const { control, handleSubmit, formState: {errors}, watch } = useForm();
 
     const navigation = useNavigation<StackParamsList>();
     
@@ -21,15 +22,18 @@ const ConfirmEmailScreen = () => {
             <Text style={styles.title}>Confirm your email</Text>
             
             <CustomInput 
+                name='code'
+                control={control}
                 placeholder='Enter confirmation code' 
-                value={code}
-                setValue={setCode} 
-                secureTextEntry={false}
+                secureTextEntry
+                rules={{
+                    validate: value => value === code || 'Code does not match'
+                }}
             />
 
             <CustomButton 
                 text='Confirm' 
-                onPress={onConfirmPress}
+                onPress={handleSubmit(onConfirmPress)}
                 type='primary'
                 
             />
