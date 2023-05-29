@@ -3,6 +3,9 @@ const COLORS = {
     secondary: "#E7F6D0",
 }
 
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
 export { 
-    COLORS 
+    COLORS,
+    EMAIL_REGEX
 }

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native';
+import { useForm, FormState } from 'react-hook-form';
 
 import { logo, apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, SocialAuthButton } from '../components';
@@ -9,12 +10,14 @@ import { useNavigation } from '@react-navigation/native';
 const SignInScreen = () => {
 
     const { width } = useWindowDimensions();
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
 
+    const { control, handleSubmit, formState: {errors} } = useForm();
+    console.log(errors);
     const navigation = useNavigation<StackParamsList>();
 
-    const signInPress = () => {
+    const signInPress = (data:any) => {
+        console.log(data);
+        
         navigation.navigate('Home');
     }
     const forgotPasswordPress = () => {
@@ -33,21 +36,26 @@ const SignInScreen = () => {
                 resizeMode='cover' 
                 style={{...styles.logo, width: width * 0.3, height: width * 0.3}}/>
             <Text style={styles.title}>Rosarea</Text>
-            <CustomInput 
+            <CustomInput
+                name='username'
+                control={control}
                 placeholder='Username' 
-                value={username} 
-                setValue={setUsername} 
                 secureTextEntry={false}
+                rules={{required: 'Username is required', }}
             />
             <CustomInput 
+                name='password'
+                control={control}
                 placeholder='Password' 
-                value={password} 
-                setValue={setPassword} 
-                secureTextEntry
+                secureTextEntry={true}
+                rules={{
+                    required: 'Password is required',
+                    minLength: {value: 4, message: 'Password must be at least 4 characters'}
+                }}
             />
             <CustomButton 
                 text='Sign In' 
-                onPress={signInPress}
+                onPress={handleSubmit(signInPress)}
                 type='primary'
                 
             />

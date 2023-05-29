@@ -1,17 +1,17 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import { GestureResponderEvent, ImageProps, ImageSourcePropType } from 'react-native';
-import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
+import {Dispatch, SetStateAction} from 'react';
+import { GestureResponderEvent } from 'react-native';
+import { SubmitHandler, FieldValues, UseControllerProps, ControllerRenderProps, ControllerFieldState, UseFormStateReturn} from 'react-hook-form';
+
 
 export interface custiomInputProps {
+    name: string,
     placeholder: string,
-    value: string,
-    setValue: Dispatch<SetStateAction<string>>,
-    secureTextEntry:boolean
+    secureTextEntry:boolean,
 }
 
 export interface custiomButtonProps {
     text: string,
-    onPress: Dispatch<SetStateAction<string>>,
+    onPress: Dispatch<SetStateAction<string>> | SubmitHandler<React.BaseSyntheticEvent>,
     type: string
 }
 
@@ -36,3 +36,8 @@ export type StackParamsList = {
     ConfirmEmail: undefined;
     navigate:  (p: string) => void;
 }
+
+export type FormData = {
+    firstName: string;
+    lastName: string;
+};
