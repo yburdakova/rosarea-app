@@ -3,12 +3,11 @@ import React from 'react'
 
 import { socialAuthButtonProps } from '../../constants/types'
 
-const SocialAuthButton = ({ onPress, logo, disabled }: socialAuthButtonProps) => {
+const SocialAuthButton = ({ onPress, logo }: socialAuthButtonProps) => {
     return (
         <TouchableHighlight
             onPress={onPress} 
             underlayColor='white'
-            disabled={disabled}
         >
             <View style={styles.icon_item}>
                 <Image source={logo} style={styles.icon}/>

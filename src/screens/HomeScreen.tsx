@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import React from 'react';
 
-const HomeScreen = () => {
+const HomeScreen = ({route}) => {
+
+const { user } = route.params;
+
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={styles.container}>
+        <Image style={styles.avatar} source={{uri: `${user.avatar}`}}/>
+        <View style={styles.welcomeContainer}>
+            <Text style={styles.welcomeName}>{user.name}</Text>
+            <Text style={styles.welcomeName}>{user.email}</Text>
+        </View>
     </View>
   )
 }

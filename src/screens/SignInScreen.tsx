@@ -13,10 +13,10 @@ import { userName, userPassword } from '../../constants';
 const SignInScreen = () => {
 
     const { width } = useWindowDimensions();
-
+    const navigation = useNavigation<StackParamsList>();
     const { control, handleSubmit, formState: {errors} } = useForm();
     console.log(errors);
-    const navigation = useNavigation<StackParamsList>();
+    
 
     const signInPress = (data:any) => {
         console.log(data);

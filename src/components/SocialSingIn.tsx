@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useState, useEffect} from 'react';
+import { StackParamsList } from '../../constants/types';
+import { useNavigation } from '@react-navigation/native';
 
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
@@ -13,6 +15,8 @@ const SocialSingIn = () => {
 
     const [token, setToken] = useState("");
     const [userInfo, setUserInfo] = useState(null);
+
+    const navigation = useNavigation<StackParamsList>();
 
     const [request, response, promptAsync] = Google.useAuthRequest({
         expoClientId: '717454502859-n0l1a998s2uf4vv6o6fs8f76e05q5qjb.apps.googleusercontent.com',
@@ -48,9 +52,21 @@ const SocialSingIn = () => {
     const signInPressGoogle = () => {
         promptAsync();
         console.warn("Google"); 
+        
     }
     
+    if (userInfo !== null) {
+        navigation.navigate('Home', {user: {
+            name: userInfo.name,
+            email: userInfo.email,
+            avatar: userInfo.picture
+        }});
+        
+    }
+
         const signInPressApple = () => {console.warn("Apple");}
+
+        
 
     return (
         <View>
