@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 
 import { apple, facebook, google } from '../../assets';
-import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton } from '../components';
+import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton, SocialSingIn } from '../components';
 
 import { StackParamsList } from '../../constants/types';
 import { EMAIL_REGEX, userName, userEmail } from '../../constants';
@@ -86,18 +86,8 @@ const SignUpScreen = () => {
                         <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
                 </Text>
             </View>
-            <View>
-                <View style={styles.devider}>
-                    <View style={styles.hr_line}/>
-                    <Text style={styles.icons_title} numberOfLines={2}>Or continue with</Text>
-                    <View style={styles.hr_line}/>
-                </View>
-                <View style={styles.icons_container}>
-                    <SocialAuthButton logo={google} onPress={signInPressGoogle}/>
-                    <SocialAuthButton logo={apple} onPress={signInPressApple}/>
-                    <SocialAuthButton logo={facebook} onPress={signInPressFacebook}/>
-                </View>
-            </View>
+            <SocialSingIn/>
+
             <CustomButton 
                 text='Have an account? Sign In'
                 onPress={signInPress}
@@ -148,29 +138,5 @@ const styles = StyleSheet.create({
         color: '#3AAA35', 
         fontFamily: 'Raleway-bold',
         textDecorationLine:'underline'
-    },
-    icons_container: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 10
-    },
-    devider:{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10,
-    },
-    hr_line:{
-        width: 50,
-        backgroundColor: '#3AAA35',
-        height: 1,
-    },
-    icons_title:{
-        fontFamily: 'Raleway-bold',
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#3AAA35',
-        marginHorizontal: 10
-    },
+    }
 })

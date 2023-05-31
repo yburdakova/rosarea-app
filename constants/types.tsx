@@ -25,6 +25,7 @@ export interface modalWindowProps {
 export interface socialAuthButtonProps {
     onPress: (event: GestureResponderEvent) => void,
     logo: any,
+    disabled?: boolean,
 }
 
 export type StackParamsList = {

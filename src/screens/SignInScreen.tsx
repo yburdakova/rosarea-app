@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native';
 import { useForm, FormState } from 'react-hook-form';
 
-import { logo, apple, facebook, google } from '../../assets';
-import { CustomInput, CustomButton, SocialAuthButton } from '../components';
+import { logo } from '../../assets';
+import { CustomInput, CustomButton, SocialSingIn } from '../components';
 import { StackParamsList } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,9 +26,7 @@ const SignInScreen = () => {
     const forgotPasswordPress = () => {
         navigation.navigate('ForgotPassword');
     }
-    const signInPressFacebook = () => {console.warn("Facebook");}
-    const signInPressGoogle = () => {console.warn("Google");}
-    const signInPressApple = () => {console.warn("Apple");}
+   
     const createNewAccount = () => {navigation.navigate('SignUp');}
 
     return (
@@ -71,19 +69,7 @@ const SignInScreen = () => {
                 onPress={forgotPasswordPress}
                 type='tertiary'
             />
-            <View>
-                <View style={styles.divider}>
-                    <View style={styles.hr_line}/>
-                    <Text style={styles.icons_title} numberOfLines={2}>Or continue with</Text>
-                    <View style={styles.hr_line}/>
-                </View>
-                <View style={styles.icons_container}>
-                    <SocialAuthButton logo={google} onPress={signInPressGoogle}/>
-                    <SocialAuthButton logo={apple} onPress={signInPressApple}/>
-                    <SocialAuthButton logo={facebook} onPress={signInPressFacebook}/>
-                </View>
-            </View>
-        
+            <SocialSingIn/>
             <CustomButton 
                 text='Don`t have an account?'
                 onPress={createNewAccount}
@@ -111,29 +97,6 @@ const styles = StyleSheet.create({
         fontSize: 36,
         marginBottom: 30,
     },
-    icons_container: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 10
-    },
-    divider:{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10,
-    },
-    hr_line:{
-        width: 50,
-        backgroundColor: '#3AAA35',
-        height: 1,
-    },
-    icons_title:{
-        fontFamily: 'Raleway-bold',
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#3AAA35',
-        marginHorizontal: 10
-    },
+    
     
 })

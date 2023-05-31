@@ -4,6 +4,7 @@ import TermOfUse from "./TermOfUse";
 import PrivacyPolicy from "./PrivacyPolicy";
 import ModalWindow from "./ModalWindow";
 import SocialAuthButton from "./SocialAuthButton";
+import SocialSingIn from "./SocialSingIn";
 
 export {
     CustomInput,
@@ -11,5 +12,6 @@ export {
     TermOfUse,
     PrivacyPolicy,
     ModalWindow,
-    SocialAuthButton
+    SocialAuthButton,
+    SocialSingIn
 }
