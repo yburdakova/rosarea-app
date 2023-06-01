@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useState, useEffect} from 'react';
-import { StackParamsList } from '../../constants/types';
+import { StackParamsList, UserProps } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
 import * as WebBrowser from 'expo-web-browser';
@@ -9,13 +9,14 @@ import * as Google from 'expo-auth-session/providers/google';
 import SocialAuthButton from './SocialAuthButton';
 import { google, apple, facebook } from '../../assets';
 
+
 WebBrowser.maybeCompleteAuthSession();
 
 const SocialSingIn = () => {
 
-    const [token, setToken] = useState("");
-    const [userInfo, setUserInfo] = useState(null);
-
+    const [token, setToken] = useState<string | undefined>("");
+    const [userInfo, setUserInfo] = useState<UserProps | null>(null);
+    console.log(userInfo);
     const navigation = useNavigation<StackParamsList>();
 
     const [request, response, promptAsync] = Google.useAuthRequest({
@@ -56,11 +57,12 @@ const SocialSingIn = () => {
     }
     
     if (userInfo !== null) {
-        navigation.navigate('Home', {user: {
-            name: userInfo.name,
-            email: userInfo.email,
-            avatar: userInfo.picture
-        }});
+        navigation.navigate('Home', {
+            user: {
+                name: userInfo.name,
+                email: userInfo.email,
+                avatar: userInfo.picture
+            }, setUserInfo});
         
     }
 

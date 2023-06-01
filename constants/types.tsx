@@ -35,17 +35,18 @@ export type StackParamsList = {
     ResetPassword: undefined;
     SignUp: undefined;
     ConfirmEmail: undefined;
-    navigate:  (p: string) => void;
-}
+    navigate: any
+    }
 
 export type FormData = {
     firstName: string;
     lastName: string;
 };
 
-export type User ={
-    id: number;
+export type UserProps ={
+    id?: number;
     name: string,
-    email: string,
-    password: string
+    email?: string,
+    password?: string,
+    picture?: string
 }
