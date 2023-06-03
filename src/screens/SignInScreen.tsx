@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native';
-import { useForm, FormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { logo } from '../../assets';
 import { CustomInput, CustomButton, SocialSingIn } from '../components';
@@ -14,19 +14,17 @@ const SignInScreen = () => {
 
     const { width } = useWindowDimensions();
     const navigation = useNavigation<StackParamsList>();
-    const { control, handleSubmit, formState: {errors} } = useForm();
-    console.log(errors);
-    
+    const { control, handleSubmit } = useForm();
 
     const signInPress = (data:any) => {
         console.log(data);
-        
         navigation.navigate('Home');
     }
+
     const forgotPasswordPress = () => {
         navigation.navigate('ForgotPassword');
     }
-   
+
     const createNewAccount = () => {navigation.navigate('SignUp');}
 
     return (

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Modal } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 
-import { apple, facebook, google } from '../../assets';
 import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton, SocialSingIn } from '../components';
 
 import { StackParamsList } from '../../constants/types';
@@ -82,8 +81,7 @@ const SignUpScreen = () => {
             />
             <View>
                 <Text style={styles.text}>
-                    By registering, you confirm that you accept our 
-                        <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
+                    By registering, you confirm that you accept our <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 
                 </Text>
             </View>
             <SocialSingIn/>

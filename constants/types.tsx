@@ -35,7 +35,8 @@ export type StackParamsList = {
     ResetPassword: undefined;
     SignUp: undefined;
     ConfirmEmail: undefined;
-    navigate: any
+    navigate: any,
+    reset:any
     }
 
 export type FormData = {
@@ -48,5 +49,5 @@ export type UserProps ={
     name: string,
     email?: string,
     password?: string,
-    picture?: string
+    picture?: any
 }

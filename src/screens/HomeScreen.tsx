@@ -9,14 +9,17 @@ const { user, setUserInfo } = route.params;
 const navigation = useNavigation<StackParamsList>();
 
 const handleLogOff = () => {
-    navigation.navigate('SignIn')
+    navigation.reset({
+        index: 0,
+        routes: [{ name: 'SignIn' }],
+    });
     setUserInfo(null);
 }
 
     return (
         <View>
             <View style={styles.container}>
-                <Image style={styles.avatar} source={{uri: `${user.avatar}`}}/>
+            <Image style={styles.avatar} source={{uri: user.avatar || 'placeholder_image_url'}}/>
                 <View style={styles.welcomeContainer}>
                     <Text style={styles.welcomeName}>{user.name}</Text>
                     <Text style={styles.welcomeName}>{user.email}</Text>
