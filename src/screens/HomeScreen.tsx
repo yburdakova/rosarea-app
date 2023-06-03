@@ -3,6 +3,8 @@ import React from 'react';
 import { StackParamsList } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
+import { defaultUser } from '../../assets';
+
 const HomeScreen = ({route}:any) => {
 
 const { user, setUserInfo } = route.params;
@@ -19,7 +21,7 @@ const handleLogOff = () => {
     return (
         <View>
             <View style={styles.container}>
-            <Image style={styles.avatar} source={{uri: user.avatar || 'placeholder_image_url'}}/>
+            <Image style={styles.avatar} source={{uri: user.avatar }} defaultSource={defaultUser}/>
                 <View style={styles.welcomeContainer}>
                     <Text style={styles.welcomeName}>{user.name}</Text>
                     <Text style={styles.welcomeName}>{user.email}</Text>

@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StackParamsList, UserProps } from '../../constants/types';
 import { useNavigation } from '@react-navigation/native';
 
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import * as Facebook from 'expo-auth-session/providers/facebook';
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 import SocialAuthButton from './SocialAuthButton';
 import { google, apple, facebook } from '../../assets';
@@ -19,9 +20,8 @@ const SocialSingIn = () => {
     const [authAPI, setAuthAPI] = useState<string | undefined>("")
     const [userInfo, setUserInfo] = useState<UserProps | null>(null);
     const navigation = useNavigation<StackParamsList>();
-    console.log(userInfo);
 
-//Google authentication
+    //Google authentication
 
     const [goRequest, goResponse, goPromptAsync] = Google.useAuthRequest({
         expoClientId: '717454502859-n0l1a998s2uf4vv6o6fs8f76e05q5qjb.apps.googleusercontent.com',
@@ -35,13 +35,13 @@ const SocialSingIn = () => {
             getGoogleUserInfo();
         }
     }, [goResponse, token]);
-    
+
     const getGoogleUserInfo = async () => {
         try {
             const goResponse = await fetch(
                 "https://www.googleapis.com/userinfo/v2/me",
                 {
-                headers: { Authorization: `Bearer ${token}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 }
             );
             const goUser = await goResponse.json();
@@ -68,61 +68,102 @@ const SocialSingIn = () => {
             getFacebookUserInfo();
         }
     }, [fbResponse, token]);
-    
+
     const getFacebookUserInfo = async () => {
         try {
             const fbResponse = await fetch(
                 `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`
-                );
-                const fbUser = await fbResponse.json();
-                if (fbUser.picture && fbUser.picture.data) {
+            );
+            const fbUser = await fbResponse.json();
+            if (fbUser.picture && fbUser.picture.data) {
                 setUserInfo(fbUser);
-                } else {
+            } else {
                 setUserInfo({ ...fbUser, picture: { data: { url: '' } } });
-                }
-            } catch (error) {
-                console.log(error);
             }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-        const signInPressFacebook = async () => {
-            setAuthAPI('facebook');
-            await fbPromptAsync();
-            console.log(userInfo);
-            
-        }
+    const signInPressFacebook = async () => {
+        setAuthAPI('facebook');
+        await fbPromptAsync();
+        console.log(userInfo);
 
-
-        
-    if (userInfo !== null) {
-        navigation.navigate('Home', {
-            user: {
-                name: userInfo.name,
-                avatar: authAPI === 'google' ? userInfo.picture : userInfo.picture.data.url
-            }, setUserInfo});
     }
 
-        const signInPressApple = () => {console.warn("Apple");}
+    // Apple authentication
 
-        
+    const getAppleUserInfo = async (credential: AppleAuthentication.AppleAuthenticationCredential) => {
+        try {
+            const credentialState = await AppleAuthentication.getCredentialStateAsync(credential.user);
+            if (credentialState === AppleAuthentication.AppleAuthenticationCredentialState.AUTHORIZED) {
+                const user = {
+                    name: credential.fullName?.givenName || "Apple User",
+                    picture: '../../assets/icons/apple.png',
+                };
+                console.log(user.picture);
+
+                setUserInfo(user);
+                setToken(`${credential.identityToken}`);
+                setAuthAPI('apple')
+            } else {
+                console.log('Apple credential not authorized');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const signInPressApple = async () => {
+        try {
+            const credential = await AppleAuthentication.signInAsync({
+                requestedScopes: [
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME, // Request full name scope
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                ],
+            });
+            const responseobject = await AppleAuthentication.AppleAuthenticationOperation.LOGIN
+            await getAppleUserInfo(credential);
+        } catch (e: any) {
+            if (e.code === 'ERR_REQUEST_CANCELED') {
+                console.log('user canceled the sign-in flow');
+            } else {
+                console.log(e.message);
+            }
+        }
+    };
+
+
+    useEffect(() => {
+        if (token !== undefined && token !== "" && userInfo !== null) {
+            navigation.navigate("Home", {
+                user: {
+                    name: userInfo.name,
+                    avatar: authAPI === "facebook" ? userInfo.picture.data.url : userInfo.picture
+                },
+                setUserInfo
+            });
+        }
+    }, [navigation, userInfo, token, authAPI]);
 
     return (
         <View>
             <View style={styles.divider}>
-                <View style={styles.hr_line}/>
+                <View style={styles.hr_line} />
                 <Text style={styles.icons_title} numberOfLines={2}>Or continue with</Text>
-                <View style={styles.hr_line}/>
+                <View style={styles.hr_line} />
             </View>
             <View style={styles.icons_container}>
-                <SocialAuthButton logo={google} onPress={signInPressGoogle} disabled={!goRequest}/>
-                <SocialAuthButton logo={apple} onPress={signInPressApple}/>
-                <SocialAuthButton logo={facebook} onPress={signInPressFacebook} disabled={!fbRequest}/>
+                <SocialAuthButton logo={google} onPress={signInPressGoogle} disabled={!goRequest} />
+                <SocialAuthButton logo={apple} onPress={signInPressApple} />
+                <SocialAuthButton logo={facebook} onPress={signInPressFacebook} disabled={!fbRequest} />
             </View>
         </View>
     )
 }
 
-export default SocialSingIn;
+export default SocialSingIn
 
 const styles = StyleSheet.create({
     icons_container: {
@@ -131,18 +172,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
-    divider:{
+    divider: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
     },
-    hr_line:{
+    hr_line: {
         width: 50,
         backgroundColor: '#3AAA35',
         height: 1,
     },
-    icons_title:{
+    icons_title: {
         fontFamily: 'Raleway-bold',
         fontSize: 16,
         textAlign: 'center',

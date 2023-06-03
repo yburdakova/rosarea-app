@@ -24,6 +24,7 @@ export interface modalWindowProps {
 
 export interface socialAuthButtonProps {
     onPress: (event: GestureResponderEvent) => void,
+    
     logo: any,
     disabled?: boolean,
 }
@@ -46,7 +47,7 @@ export type FormData = {
 
 export type UserProps ={
     id?: number;
-    name: string,
+    name: string | null | undefined;
     email?: string,
     password?: string,
     picture?: any
