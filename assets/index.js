@@ -1,7 +1,8 @@
 import avatar from './images/avatar.jpg';
 import logo from './images/logo.png';
 import favicon from '../assets/favicon.png';
-import defaultUser from '../assets/icons/defaultUser.png'
+import defaultUser from '../assets/icons/defaultUser.png';
+import defaultApppleUser from '../assets/icons/defaultAppleUser.png'
 
 import apple from '../assets/icons/apple.png';
 import google from '../assets/icons/google.png';
@@ -14,5 +15,6 @@ export {
     google,
     facebook,
     favicon,
-    defaultUser
+    defaultUser,
+    defaultApppleUser
 }

@@ -9,7 +9,7 @@ import * as Facebook from 'expo-auth-session/providers/facebook';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 import SocialAuthButton from './SocialAuthButton';
-import { google, apple, facebook } from '../../assets';
+import { google, apple, facebook, defaultApppleUser } from '../../assets';
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -94,13 +94,14 @@ const SocialSingIn = () => {
 
     // Apple authentication
 
-    const getAppleUserInfo = async (credential: AppleAuthentication.AppleAuthenticationCredential) => {
+    const getAppleUserInfo = async (credential: AppleAuthentication.AppleAuthenticationCredential, defaultAppleUser:string) => {
         try {
+            const defaultAppleUserAvatar = defaultAppleUser;
             const credentialState = await AppleAuthentication.getCredentialStateAsync(credential.user);
             if (credentialState === AppleAuthentication.AppleAuthenticationCredentialState.AUTHORIZED) {
                 const user = {
                     name: credential.fullName?.givenName || "Apple User",
-                    picture: '../../assets/icons/apple.png',
+                    picture: defaultAppleUserAvatar,
                 };
                 console.log(user.picture);
 
@@ -123,8 +124,8 @@ const SocialSingIn = () => {
                     AppleAuthentication.AppleAuthenticationScope.EMAIL,
                 ],
             });
-            const responseobject = await AppleAuthentication.AppleAuthenticationOperation.LOGIN
-            await getAppleUserInfo(credential);
+            const defaultAppleUser = defaultApppleUser // Define the default picture value
+        await getAppleUserInfo(credential, defaultAppleUser);
         } catch (e: any) {
             if (e.code === 'ERR_REQUEST_CANCELED') {
                 console.log('user canceled the sign-in flow');
