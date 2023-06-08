@@ -11,7 +11,6 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import SocialAuthButton from './SocialAuthButton';
 import { google, apple, facebook, defaultApppleUser } from '../../assets';
 
-
 WebBrowser.maybeCompleteAuthSession();
 
 const SocialSingIn = () => {
@@ -94,18 +93,18 @@ const SocialSingIn = () => {
 
     // Apple authentication
 
-    const getAppleUserInfo = async (credential: AppleAuthentication.AppleAuthenticationCredential, defaultAppleUser:string) => {
+    const getAppleUserInfo = async (credential: AppleAuthentication.AppleAuthenticationCredential, defaultApppleUser:string) => {
         try {
-            const defaultAppleUserAvatar = defaultAppleUser;
+            const defaultAppleUserAvatar = defaultApppleUser ;
             const credentialState = await AppleAuthentication.getCredentialStateAsync(credential.user);
             if (credentialState === AppleAuthentication.AppleAuthenticationCredentialState.AUTHORIZED) {
-                const user = {
+                const appleUser = {
                     name: credential.fullName?.givenName || "Apple User",
-                    picture: defaultAppleUserAvatar,
+                    
                 };
-                console.log(user.picture);
+                console.log(appleUser);
 
-                setUserInfo(user);
+                setUserInfo(appleUser);
                 setToken(`${credential.identityToken}`);
                 setAuthAPI('apple')
             } else {
@@ -124,7 +123,7 @@ const SocialSingIn = () => {
                     AppleAuthentication.AppleAuthenticationScope.EMAIL,
                 ],
             });
-            const defaultAppleUser = defaultApppleUser // Define the default picture value
+            const defaultAppleUser = require('../../assets/icons/defaultAppleUser.png') // Define the default picture value
         await getAppleUserInfo(credential, defaultAppleUser);
         } catch (e: any) {
             if (e.code === 'ERR_REQUEST_CANCELED') {
