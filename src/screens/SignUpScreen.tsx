@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { CustomInput, CustomButton, ModalWindow, TermOfUse, PrivacyPolicy, SocialAuthButton, SocialSingIn } from '../components';
 
 import { StackParamsList } from '../../constants/types';
-import { EMAIL_REGEX, userName, userEmail } from '../../constants';
+import { EMAIL_REGEX  } from '../../constants';
 
 
 
@@ -14,6 +14,9 @@ const SignUpScreen = () => {
 
     const [isTermOfUseVisible, setIsTermOfUseVisible] = useState(false);
     const [isPrivacyPolicyVisible, setIsPrivacyPolicyVisible] = useState(false);
+    const [username, setUsername] = useState<string>("username");
+    const [password, setPassword] = useState<string>("password");
+    const [email, setEmail] = useState<string>("email");
 
     const navigation = useNavigation<StackParamsList>();
     const { control, handleSubmit, formState: {errors}, watch } = useForm();
@@ -21,9 +24,6 @@ const SignUpScreen = () => {
 
     const signUpPress = () => {navigation.navigate('ConfirmEmail')}
     const signInPress= () => {navigation.navigate('SignIn')}
-    const signInPressFacebook = () => {console.warn("Facebook");}
-    const signInPressGoogle = () => {console.warn("Google");}
-    const signInPressApple = () => {console.warn("Apple");}
     const termOfUseModal = () => setIsTermOfUseVisible(() => !isTermOfUseVisible);
     const privacyPolicyModal = () => setIsPrivacyPolicyVisible(() => !isPrivacyPolicyVisible);
 
@@ -39,8 +39,10 @@ const SignUpScreen = () => {
                     required: 'Username is required', 
                     minLength: {value: 3, message: 'Username must be at least 3 characters'},
                     maxLength: {value: 20, message: 'Username must be max 20 characters'},
-                    validate: value => value !== userName || 'Username already exists'
+                    validate: value => value !== name || 'Username already exists'
                 }}
+                inputValue={username}
+                onChangeValue={setUsername}
             />
             <CustomInput 
                 name='email'
@@ -50,8 +52,10 @@ const SignUpScreen = () => {
                 rules={{
                     required: 'Email is required',
                     pattern: {value: EMAIL_REGEX, message: 'Email has invalid format'},
-                    validate: value => value !== userEmail || 'Email already exists'
+                    validate: value => value !== email || 'Email already exists'
                 }}
+                inputValue={email}
+                
             />
             <CustomInput 
                 name='password'
@@ -63,6 +67,8 @@ const SignUpScreen = () => {
                     minLength: {value: 4, message: 'Password must be at least 4 characters'},
                     maxLength: {value: 16, message: 'Password must be max 16 characters'}
                 }}
+                inputValue={password}
+                
             />
             <CustomInput 
                 name='password-repeat'
@@ -79,6 +85,9 @@ const SignUpScreen = () => {
                 type='primary'
                 
             />
+            {/* Visual this.state */}
+            <Text>{JSON.stringify({username, password, email})}</Text>
+
             <View>
                 <Text style={styles.text}>
                     By registering, you confirm that you accept our <Text style={styles.link} onPress={termOfUseModal}>Terms of Use</Text> and <Text style={styles.link} onPress={privacyPolicyModal}>Privacy Policy</Text> 

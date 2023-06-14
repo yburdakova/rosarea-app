@@ -1,12 +1,14 @@
 import {Dispatch, SetStateAction} from 'react';
-import { GestureResponderEvent } from 'react-native';
-import { SubmitHandler, FieldValues, UseControllerProps, ControllerRenderProps, ControllerFieldState, UseFormStateReturn} from 'react-hook-form';
+import { GestureResponderEvent, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
+import { SubmitHandler, } from 'react-hook-form';
 
 
 export interface custiomInputProps {
     name: string,
     placeholder: string,
     secureTextEntry:boolean,
+    inputValue?: string,
+    onChangeValue?: any 
 }
 
 export interface custiomButtonProps {

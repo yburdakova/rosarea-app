@@ -16,9 +16,10 @@ WebBrowser.maybeCompleteAuthSession();
 const SocialSingIn = () => {
 
     const [token, setToken] = useState<string | undefined>("");
-    const [authAPI, setAuthAPI] = useState<string | undefined>("")
+    const [authAPI, setAuthAPI] = useState<string | undefined>("");
     const [userInfo, setUserInfo] = useState<UserProps | null>(null);
     const navigation = useNavigation<StackParamsList>();
+
 
     //Google authentication
 
